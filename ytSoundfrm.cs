@@ -6,6 +6,8 @@ using System.Drawing;
 using ytSound.service;
 using System.Collections.Generic;
 using YoutubeExplode.Videos;
+using Google.Apis.YouTube.v3.Data;
+using System.Diagnostics;
 
 namespace ytSound
 {
@@ -15,6 +17,8 @@ namespace ytSound
         private YouTubeAudioPlayer audioPlayer;
         private string singleVideoType = "v";
         private string listVideoType = "list";
+        ytService ytService = new ytService();
+        private string youtubeUrl = "https://www.youtube.com/";
 
         public ytSoundfrm()
         {
@@ -35,8 +39,8 @@ namespace ytSound
                 View = View.Details,
                 FullRowSelect = true,
                 CheckBoxes = true,
-                Location = new Point(10, 100), // Set appropriate location
-                Size = new Size(1000, 250) // Set appropriate size
+                Location = new Point(450, 100), // Set appropriate location
+                Size = new Size(900, 250) // Set appropriate size
             };
 
             listViewLinkInfo.Columns.Add("Title", 150);
@@ -76,6 +80,7 @@ namespace ytSound
             if (url.Contains(listVideoType + "="))
             {
                 //await FetchPlayListAsync(url);
+                MessageBox.Show("List is coming");
             }
             else
             {
@@ -92,9 +97,10 @@ namespace ytSound
                     btnControl(false);
                     string videoId = (string)item.Tag;
                     await audioPlayer.PlayAudioFromVideoAsync(videoId, item);                    
-                    break;
+                    //break;
                 }
             }
+            btnControl(true);
         }
 
         private void btnPause_Click(object sender, EventArgs e)
@@ -140,32 +146,8 @@ namespace ytSound
         {
             btnPlay.Enabled = control;
             txtListUrl.Enabled = control;
-        }
-        
+        }      
 
-
-        // get a single video info
-        async Task FetchVideoAsync(string url)
-        {
-            ytService ytService = new ytService();
-            var videoId = ytService.ExtractVideoIdOrListID(url, singleVideoType);
-            
-            if (videoId == null)
-            {
-                MessageBox.Show("Invalid Yourube URL");
-                return;
-            }
-            
-            var videoDetails = await ytService.GetVideoDetailsAsync(videoId);
-            if (videoDetails == null)
-            {
-                MessageBox.Show("Video not found or an error occurred.");
-                return;
-            }
-
-            listViewLinkInfo.Items.Clear();
-            SetListView(videoDetails);        
-        }
 
         private void SetListView(Google.Apis.YouTube.v3.Data.Video videoDetails)
         {
@@ -229,17 +211,16 @@ namespace ytSound
                 {
                     foreach (var kvp in savedUrls)
                     {                        
-                        await FetchVideo(kvp.Value.ToString());                       
+                        await FetchVideoFromTheSavedData(kvp.Value.ToString());                       
                         
                     }
                 }
             }
         }
 
-        // get a single video info
-        private async Task FetchVideo(string videoId)
+
+        async Task ProcessVideoAsync(string videoId)
         {
-            ytService ytService = new ytService();            
             if (videoId == null)
             {
                 MessageBox.Show("Invalid Yourube URL");
@@ -255,6 +236,21 @@ namespace ytSound
 
             SetListView(videoDetails);
         }
+
+        // get a single video info from the url
+        async Task FetchVideoAsync(string url)
+        {
+            var videoId = ytService.ExtractVideoIdOrListID(url, singleVideoType);
+            await ProcessVideoAsync(videoId);
+        }
+
+        // get a single video info from the saved data
+        async Task FetchVideoFromTheSavedData(string videoId)
+        {
+            await ProcessVideoAsync(videoId);
+        }
+       
+
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -277,6 +273,37 @@ namespace ytSound
             MessageBox.Show("Deleted.");
             CheckSavedUrls(true);
 
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "Built by JJST Company \n" +
+                "Since 2018 \n" +
+                "Thank you"
+                );
+        }
+
+        private void btnToYouTube_Click(object sender, EventArgs e)
+        {
+            OpenBrowserWithUrl(youtubeUrl);
+        }
+
+        // 특정 URL로 웹 브라우저 열기
+        void OpenBrowserWithUrl(string url)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to open the browser. Error: {ex.Message}");
+            }
         }
 
 

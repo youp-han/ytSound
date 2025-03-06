@@ -63,7 +63,9 @@ namespace ytSound.utility
                     "Please the stop button to conitue using the application. Thank you");
                 quit(listViewItem);
 
-            }          
+            }
+
+            listViewItem.Checked = false;
             
         }
 
