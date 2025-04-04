@@ -16,7 +16,8 @@ It is under a coding stage.
 Stop and Pause are different actions.
 
 
-![image](https://github.com/user-attachments/assets/34c939dd-fa36-422a-941a-c5ed54dbdd1e)
+![image](https://github.com/user-attachments/assets/d6197fef-4242-402b-9296-5eb9403447f8)
+
 
 
 # how it works 
