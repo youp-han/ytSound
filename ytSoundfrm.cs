@@ -34,7 +34,7 @@ namespace ytSound
 
         private void InitializeListView()
         {
-            listViewLinkInfo = new ListViewWithButtons
+            listViewLinkInfo = new ListViewWithButtons(this)
             {
                 View = View.Details,
                 FullRowSelect = true,
@@ -96,9 +96,10 @@ namespace ytSound
             foreach (ListViewItem item in listViewLinkInfo.Items)
             {
                 if (item.Checked)
-                {
+                {                
                     btnControl(false);
                     string videoId = (string)item.Tag;
+                    ShowImageInPictureBox(item.SubItems[7].Text);
                     await audioPlayer.PlayAudioFromVideoAsync(videoId, item);                    
                     //break;
                 }
@@ -312,6 +313,31 @@ namespace ytSound
                 MessageBox.Show($"Failed to open the browser. Error: {ex.Message}");
             }
         }
+
+        //show pictures
+        public void ShowImageInPictureBox(string imageUrl)
+        {
+            try
+            {
+                // Assuming a PictureBox named "imageBox" already exists in your form
+                PictureBox pictureBox = this.Controls["imageBox"] as PictureBox;
+
+                if (pictureBox != null)
+                {
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Adjust to fit the image
+                    pictureBox.Load(imageUrl); // Load the image from the URL
+                }
+                else
+                {
+                    MessageBox.Show("PictureBox 'imageBox' was not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading the image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
 

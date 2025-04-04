@@ -7,9 +7,10 @@ namespace ytSound.utility
 {
     public class ListViewWithButtons : ListView
     {
-
-        public ListViewWithButtons()
+        private ytSoundfrm parentForm;
+        public ListViewWithButtons(ytSoundfrm form)
         {
+            this.parentForm = form; // ytSoundfrm 참조를 저장
             this.View = View.Details;
             this.FullRowSelect = true;
             this.CheckBoxes = true;
@@ -27,35 +28,9 @@ namespace ytSound.utility
                 thumbnailUrl = hitTest.Item.SubItems[7].Text;
 
                 // Call ShowImageInPictureBox with the retrieved URL
-                ShowImageInPictureBox(thumbnailUrl);
+                parentForm.ShowImageInPictureBox(thumbnailUrl);
             }
         }
-        
-
-        private void ShowImageInPictureBox(string imageUrl)
-        {
-            try
-            {
-                // PictureBox의 Name 속성을 기준으로 기존 PictureBox 검색
-                PictureBox pictureBox = this.Parent.Controls["imageBox"] as PictureBox;
-
-                if (pictureBox != null)
-                {
-                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // 크기 조정
-                    pictureBox.Load(imageUrl); // 이미지 로드
-                }
-                else
-                {
-                    MessageBox.Show("PictureBox가 존재하지 않습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"이미지 로드 중 오류 발생: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
 
         public void AddControlToItem(Control control, int itemIndex, int subItemIndex)
         {
