@@ -15,16 +15,16 @@ namespace ytSound.dto
         public string PlaylistId { get; set; } // Items.Snippet.PlayListId
         public string VideoId { get; set; } // Items.Snippet.ResourceId.VideoId
         public DateTime? PublishedAt { get; set; } // Items.Snippet.PublishedAt
-        //public Thumbnail Thumbnail { get; set; } // Adjust this according to your needs
+        public Thumbnail Thumbnail { get; set; } // Adjust this according to your needs
 
     }
 
-    //internal class Thumbnail
-    //{
-    //    public string URL { get; set; }
-    //    public long Width { get; set; }
-    //    public long Height { get; set; }
-    //}
+    internal class Thumbnail
+    {
+        public string URL { get; set; }
+        public long Width { get; set; }
+        public long Height { get; set; }
+    }
 
 
 }

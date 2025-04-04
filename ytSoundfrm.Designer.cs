@@ -36,10 +36,10 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnToYouTube = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.imageBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGet
@@ -117,20 +117,9 @@
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.groupBox1.Controls.Add(this.btnToYouTube);
-            this.groupBox1.Controls.Add(this.btnAbout);
-            this.groupBox1.Location = new System.Drawing.Point(19, 16);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(558, 533);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            // 
             // btnAbout
             // 
-            this.btnAbout.Location = new System.Drawing.Point(29, 437);
+            this.btnAbout.Location = new System.Drawing.Point(48, 404);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(498, 57);
             this.btnAbout.TabIndex = 0;
@@ -140,7 +129,7 @@
             // 
             // btnToYouTube
             // 
-            this.btnToYouTube.Location = new System.Drawing.Point(29, 362);
+            this.btnToYouTube.Location = new System.Drawing.Point(48, 328);
             this.btnToYouTube.Name = "btnToYouTube";
             this.btnToYouTube.Size = new System.Drawing.Size(498, 57);
             this.btnToYouTube.TabIndex = 1;
@@ -148,13 +137,23 @@
             this.btnToYouTube.UseVisualStyleBackColor = true;
             this.btnToYouTube.Click += new System.EventHandler(this.btnToYouTube_Click);
             // 
+            // imageBox
+            // 
+            this.imageBox.Location = new System.Drawing.Point(77, 24);
+            this.imageBox.Name = "imageBox";
+            this.imageBox.Size = new System.Drawing.Size(451, 288);
+            this.imageBox.TabIndex = 2;
+            this.imageBox.TabStop = false;
+            // 
             // ytSoundfrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1962, 561);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1962, 504);
+            this.Controls.Add(this.btnAbout);
+            this.Controls.Add(this.btnToYouTube);
+            this.Controls.Add(this.imageBox);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnStop);
@@ -168,7 +167,7 @@
             this.MinimizeBox = false;
             this.Name = "ytSoundfrm";
             this.Text = "jjstSound";
-            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,9 +182,9 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.Button btnToYouTube;
+        private System.Windows.Forms.PictureBox imageBox;
     }
 }
 

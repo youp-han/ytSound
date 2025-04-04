@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace ytSound.utility
 {
@@ -21,6 +22,7 @@ namespace ytSound.utility
             }
 
             string jsonString = JsonSerializer.Serialize(existingUrls);
+            MessageBox.Show(":)" + storageFilePath);
             File.WriteAllText(storageFilePath, jsonString);
         }
 

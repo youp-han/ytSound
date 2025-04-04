@@ -50,6 +50,9 @@ namespace ytSound
             listViewLinkInfo.Columns.Add("Duration", 100);
             listViewLinkInfo.Columns.Add("Status", 100);
             listViewLinkInfo.Columns.Add("VideoID", 0);
+            listViewLinkInfo.Columns.Add("photoUrl", 0);
+            listViewLinkInfo.Columns.Add("photoH", 0);
+            listViewLinkInfo.Columns.Add("photoW", 0);
 
 
             this.Controls.Add(listViewLinkInfo);
@@ -151,7 +154,8 @@ namespace ytSound
 
         private void SetListView(Google.Apis.YouTube.v3.Data.Video videoDetails)
         {
-            var listViewItem = new ListViewItem(videoDetails.Snippet.Title);
+            var listViewItem = new ListViewItem(videoDetails.Snippet.Title);            
+
             listViewItem.Tag = videoDetails.Id;
             listViewItem.SubItems.Add(videoDetails.Snippet.Description);
             listViewItem.SubItems.Add(videoDetails.Snippet.ChannelTitle);
@@ -159,6 +163,9 @@ namespace ytSound
             listViewItem.SubItems.Add(videoDetails.ContentDetails.Duration);
             listViewItem.SubItems.Add("Stop");
             listViewItem.SubItems.Add(videoDetails.Id);
+            listViewItem.SubItems.Add(videoDetails.Snippet.Thumbnails.Default__.Url);
+            listViewItem.SubItems.Add(videoDetails.Snippet.Thumbnails.Default__.Height.ToString());
+            listViewItem.SubItems.Add(videoDetails.Snippet.Thumbnails.Default__.Width.ToString());       
             listViewLinkInfo.Items.Add(listViewItem);
         }
 
@@ -251,7 +258,7 @@ namespace ytSound
         }
        
 
-
+        
         private void btnDelete_Click(object sender, EventArgs e)
         {
             Dictionary<string, string> checkedUrls = new Dictionary<string, string>();
